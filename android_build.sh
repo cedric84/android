@@ -25,6 +25,8 @@ ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list device -c
 echo ________
 ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list avd -c
 echo ________
+${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --list
+echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
