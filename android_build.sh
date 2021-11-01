@@ -50,8 +50,8 @@ ${ANDROID_ADB} devices
 echo ________
 #ps
 #echo ________
-#${ANDROID_ADB} shell ls
-#echo ________
+${ANDROID_ADB} -s emulator-5554 shell ls
+echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
