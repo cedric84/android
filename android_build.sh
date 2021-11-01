@@ -53,7 +53,7 @@ ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
-${ANDROID_ADB} shell ls -la /sdcard
+${ANDROID_ADB} shell ls -la /sdcard/.
 echo ________
 
 #---Copy files---#
