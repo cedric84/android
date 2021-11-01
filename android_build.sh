@@ -37,7 +37,7 @@ echo ________
 #${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window -shell
 ${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window &
 echo ________
-${ANDROID_HOME}/platform-tools/adb devices -l
+${ANDROID_HOME}/platform-tools/adb devices
 echo ________
 
 #---Copy files---#
