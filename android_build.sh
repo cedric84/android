@@ -39,7 +39,7 @@ ${ANDROID_AVDMANAGER} list avd -c
 #echo ________
 #find / -name .emulator_console_auth_token
 #echo ________
-${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -no-snapshot &
+${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -no-audio -no-snapshot &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
