@@ -48,9 +48,10 @@ ${ANDROID_MKSDCARD} 128M ./mySdCard.img
 md5sum ./mySdCard.img
 mkdir ./sdcard
 #sudo mount -o loop,sync,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
-sudo mount -o loop,sync,uid=$(echo `whoami`) ./mySdCard.img ./sdcard
-mv ./app ./sdcard
-sync
+#sudo mount -o loop,sync,uid=$(echo `whoami`) ./mySdCard.img ./sdcard
+#mv ./app ./sdcard
+sudo mount -o loop ./mySdCard.img ./sdcard
+sudo mv ./app ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
 md5sum ./mySdCard.img
