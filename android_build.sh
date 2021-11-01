@@ -4,7 +4,7 @@
 #ANDROID_HOME=/home/cedric/apps/x86_64-gnu/dev/android-sdk
 #ANDROID_EMULATOR_SN=emulator-5554
 #ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s ${ANDROID_EMULATOR_SN}"
-#ANDROID_DEST_PATH=/data/local
+ANDROID_DEST_PATH=/data/local
 ANDROID_API=16
 #ANDROID_API=24
 MY_PREFIX=armv7a-linux-androideabi${ANDROID_API}-
@@ -38,48 +38,38 @@ ANDROID_MKSDCARD=${ANDROID_HOME}/emulator/mksdcard
 ANDROID_AVD_NAME=armv7a-api16
 echo ________
 ${ANDROID_AVDMANAGER} list avd -c
-#echo ________
-#find / -name .emulator_console_auth_token
-#echo ________
-#echo ________
-#ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
-${ANDROID_MKSDCARD} 128M ./mySdCard.img
-md5sum ./mySdCard.img
-mkdir ./sdcard
+#${ANDROID_MKSDCARD} 128M ./mySdCard.img
+#mkdir ./sdcard
 #sudo mount -o loop,sync,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 #sudo mount -o loop,sync,uid=$(echo `whoami`) ./mySdCard.img ./sdcard
 #mv ./app ./sdcard
-sudo mount -o loop ./mySdCard.img ./sdcard
-sudo mv ./app ./sdcard
-sudo umount ./sdcard
-rmdir ./sdcard
-md5sum ./mySdCard.img
+#sudo umount ./sdcard
+#rmdir ./sdcard
 echo ________
 ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot -sdcard ./mySdCard.img &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
-#${ANDROID_ADB} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
-${ANDROID_ADB} shell 'while [[ -z $(ls /sdcard/) ]]; do sleep 1; done;'
-
-${ANDROID_ADB} shell ls -la /sdcard
-echo ________
-${ANDROID_ADB} shell ls -la /storage
-echo ________
-${ANDROID_ADB} shell ls -la /mnt/sdcard
-echo ________
-${ANDROID_ADB} shell /sdcard/app
-echo ________
-${ANDROID_ADB} shell /mnt/sdcard/app
-echo ________
+${ANDROID_ADB} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+#${ANDROID_ADB} shell 'while [[ -z $(ls /sdcard/) ]]; do sleep 1; done;'
+#${ANDROID_ADB} shell ls -la /sdcard/
+#echo ________
+#${ANDROID_ADB} shell ls -la /storage/
+#echo ________
+#${ANDROID_ADB} shell ls -la /mnt/sdcard/
+#echo ________
+#${ANDROID_ADB} shell /sdcard/app
+#echo ________
+#${ANDROID_ADB} shell /mnt/sdcard/app
+#echo ________
 
 #---Copy files---#
-#${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
+${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
 
 #---Run---#
 #${ANDROID_ADB} shell date
-#${ANDROID_ADB} shell ${ANDROID_DEST_PATH}/app
+${ANDROID_ADB} shell ${ANDROID_DEST_PATH}/app
 #${ANDROID_ADB} shell date
 
 #---Remove the application---#
