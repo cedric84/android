@@ -43,16 +43,17 @@ ${ANDROID_AVDMANAGER} list avd -c
 echo ________
 ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
-LOOP_DEVICE=$(sudo losetup -f)
-sudo losetup ${LOOP_DEVICE} ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img
+#LOOP_DEVICE=$(sudo losetup -f)
+#sudo losetup ${LOOP_DEVICE} ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img
 mkdir ./sdcard
-sudo mount ${LOOP_DEVICE} ./sdcard
+#sudo mount ${LOOP_DEVICE} ./sdcard
+sudo mount -o loop ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 mv ./app ./sdcard
 sudo touch ./sdcard/coucou
 ls -la ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
-sudo losetup -d ${LOOP_DEVICE}
+#sudo losetup -d ${LOOP_DEVICE}
 echo ________
 ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
 echo ________
