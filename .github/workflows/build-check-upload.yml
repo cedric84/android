@@ -12,3 +12,7 @@ jobs:
         run: |
           cd ${ANDROID_HOME}
           ls
+      #---
+      - name: log
+        run: |
+          bash ./android_build.sh
