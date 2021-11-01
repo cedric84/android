@@ -53,11 +53,11 @@ ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
-${ANDROID_ADB} shell tree -R /sdcard/.
+${ANDROID_ADB} shell ls -la /sdcard/.
 echo ________
-${ANDROID_ADB} shell tree -R /storage/.
+${ANDROID_ADB} shell ls -la /storage/.
 echo ________
-${ANDROID_ADB} shell tree -R /mnt/sdcard/.
+${ANDROID_ADB} shell ls -la /mnt/sdcard/.
 echo ________
 
 #---Copy files---#
