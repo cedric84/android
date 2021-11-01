@@ -37,8 +37,7 @@ ANDROID_EMULATOR=${ANDROID_HOME}/emulator/emulator
 echo ________
 ${ANDROID_AVDMANAGER} list avd -c
 echo ________
-cat ${HOME}/.emulator_console_auth_token
-ls -la ${HOME}
+find / -name .emulator_console_auth_token
 echo ________
 #${ANDROID_ADB} kill-server
 #echo -ne 'whoami\npwd\nexit\n' | ${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -shell
