@@ -24,10 +24,13 @@ jobs:
 #          TEST=$(find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake)
 #          cat ${TEST}
           
-      #---Install---#
+      #---Prerequisites---#
       - name: install
         run: |
           ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
+      - name: create avd
+        run: |
+          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "armv7a-api16" -k "system-images;android-16;default;armeabi-v7a"
 
       #---Build---#
       - name: build
