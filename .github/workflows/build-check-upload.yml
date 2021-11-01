@@ -7,6 +7,11 @@ jobs:
   ubuntu-build:
     runs-on: ubuntu-latest
     steps:
+
+      #---Checkout current repository---#
+      - name: checkout
+        uses: actions/checkout@v2
+
       #---
       - name: log
         run: |
