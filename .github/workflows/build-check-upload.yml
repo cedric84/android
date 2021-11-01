@@ -13,19 +13,19 @@ jobs:
         uses: actions/checkout@v2
 
       #---
-      - name: log
-        run: |
-          #tree -L 20 ${ANDROID_HOME}
-          #printenv | grep ANDROID
-          #echo ______________
-          #find ${ANDROID_HOME} -name armv7a-linux-androideabi16-clang
-          #echo ______________
-          #find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi16-clang
-          TEST=$(find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake)
-          cat ${TEST}
+#      - name: log
+#        run: |
+#          tree -L 20 ${ANDROID_HOME}
+#          printenv | grep ANDROID
+#          echo ______________
+#          find ${ANDROID_HOME} -name armv7a-linux-androideabi16-clang
+#          echo ______________
+#          find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi16-clang
+#          TEST=$(find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake)
+#          cat ${TEST}
           
       #---
       - name: build
         run: |
-          #tree -R
           bash ./android_build.sh
+          tree -R
