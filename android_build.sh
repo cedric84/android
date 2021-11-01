@@ -68,6 +68,10 @@ ${ANDROID_ADB} shell ls -la /storage
 echo ________
 ${ANDROID_ADB} shell ls -la /mnt/sdcard
 echo ________
+${ANDROID_ADB} shell /sdcard/app
+echo ________
+${ANDROID_ADB} shell /mnt/sdcard/app
+echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
