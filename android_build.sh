@@ -35,9 +35,9 @@ echo ________
 ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list avd -c
 echo ________
 ${ANDROID_HOME}/platform-tools/adb kill-server
+${ANDROID_HOME}/platform-tools/adb start-server
 #${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window -shell
 ${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window &
-${ANDROID_HOME}/platform-tools/adb start-server
 echo ________
 sleep 5
 ${ANDROID_HOME}/platform-tools/adb devices
