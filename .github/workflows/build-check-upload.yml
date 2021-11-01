@@ -2,7 +2,7 @@ name: build & check the application
 on:
   push:
     branches:
-      - ci
+      - master
 jobs:
   ubuntu-build:
     runs-on: ubuntu-latest
