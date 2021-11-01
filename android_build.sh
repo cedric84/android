@@ -40,13 +40,12 @@ ${ANDROID_AVDMANAGER} list avd -c
 #echo ________
 #find / -name .emulator_console_auth_token
 #echo ________
-echo ________
-ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
+#echo ________
+#ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
 mkdir ./sdcard
 sudo mount -o loop,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 mv ./app ./sdcard
-ls -la ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
 echo ________
@@ -54,7 +53,7 @@ ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
-${ANDROID_ADB} shell ls -la
+${ANDROID_ADB} shell ls -la /sdcard
 echo ________
 
 #---Copy files---#
