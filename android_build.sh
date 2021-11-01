@@ -31,17 +31,19 @@ ${CC} -Wall -Werror -o./app	\
 #${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --list
 #echo ________
 
+ANDROID_AVDMANAGER=${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
+ANDROID_ADB=${ANDROID_HOME}/platform-tools/adb
+ANDROID_EMULATOR=${ANDROID_HOME}/emulator/emulator
 echo ________
-${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list avd -c
+${ANDROID_AVDMANAGER} list avd -c
 echo ________
-${ANDROID_HOME}/platform-tools/adb kill-server
-#${ANDROID_HOME}/platform-tools/adb start-server
-#${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window -shell
-${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window &
-echo ________
+${ANDROID_ADB} kill-server
+${ANDROID_ADB} start-server
 sleep 10
-${ANDROID_HOME}/platform-tools/adb start-server
-${ANDROID_HOME}/platform-tools/adb devices
+#${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -shell
+${ANDROID_EMULATOR} -avd armv7a-api16 -no-window &
+echo ________
+${ANDROID_ADB} devices
 echo ________
 ps
 echo ________
