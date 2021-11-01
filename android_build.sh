@@ -7,16 +7,19 @@
 #ANDROID_DEST_PATH=/data/local
 ANDROID_API=16
 #ANDROID_API=24
+MY_PREFIX=armv7a-linux-androideabi${ANDROID_API}-
 
 #---Restart as root---#
 #${ANDROID_ADB} root
 
 #---Build---#
-#CC=${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi${ANDROID_API}-clang
-CC=$(find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi${ANDROID_API}-clang)
-echo ${CC}
+CC=$(find ${ANDROID_NDK_LATEST_HOME} -name ${MY_PREFIX}clang)
 ${CC} -Wall -Werror -o./app	\
 	./main.c
+
+echo ________
+${ANDROID_HOME}/emulator/emulator -list-avds
+echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
