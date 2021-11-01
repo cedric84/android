@@ -45,12 +45,15 @@ ${ANDROID_AVDMANAGER} list avd -c
 #ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
 ${ANDROID_MKSDCARD} 128M ./mySdCard.img
+md5sum ./mySdCard.img
 mkdir ./sdcard
 #sudo mount -o loop,sync,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 sudo mount -o loop,sync,uid=$(echo `whoami`) ./mySdCard.img ./sdcard
 mv ./app ./sdcard
+sync
 sudo umount ./sdcard
 rmdir ./sdcard
+md5sum ./mySdCard.img
 echo ________
 ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot -sdcard ./mySdCard.img &
 echo ________
@@ -61,8 +64,6 @@ echo ________
 ${ANDROID_ADB} shell ls -la /storage
 echo ________
 ${ANDROID_ADB} shell ls -la /mnt/sdcard
-echo ________
-${ANDROID_ADB} shell ls -la /data
 echo ________
 
 #---Copy files---#
