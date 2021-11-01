@@ -59,6 +59,7 @@ ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot -
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
+${ANDROID_ADB} shell "while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;"
 ${ANDROID_ADB} shell ls -la /sdcard
 echo ________
 ${ANDROID_ADB} shell ls -la /storage
