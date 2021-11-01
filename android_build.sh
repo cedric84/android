@@ -27,11 +27,18 @@ ${CC} -Wall -Werror -o./app	\
 #${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list target -c
 #echo ________
 #${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list device -c
+#echo ________
+#${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --list
+#echo ________
+
 echo ________
 ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list avd -c
 echo ________
-#${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --list
-#echo ________
+${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window -shell
+echo ________
+pwd
+whoami
+echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
