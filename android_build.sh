@@ -46,6 +46,7 @@ ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
 ${ANDROID_MKSDCARD} -l mySdCard 128M ./mySdCard.img
 mkdir ./sdcard
+ls -la
 #sudo mount -o loop,rw ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 sudo mount -o loop,rw ./mySdCard.img ./sdcard
 cp ./app ./sdcard
