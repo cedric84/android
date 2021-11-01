@@ -44,10 +44,7 @@ echo ________
 ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
 mkdir ./sdcard
-sudo mount -o loop,uid=runner ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
-#whoami
-#sudo whoami
-#sudo chown runner ./sdcard
+sudo mount -o loop,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 mv ./app ./sdcard
 ls -la ./sdcard
 sudo umount ./sdcard
