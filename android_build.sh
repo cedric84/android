@@ -41,12 +41,9 @@ ${ANDROID_AVDMANAGER} list avd -c
 #echo ________
 ${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -no-snapshot &
 echo ________
-#sleep 180s
-#${ANDROID_ADB} kill-server
-#${ANDROID_ADB} devices
-${ANDROID_ADB} -s emulator-5554 wait-for-device
+${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
-${ANDROID_ADB} -s emulator-5554 shell ls -la
+${ANDROID_ADB} shell ls -la
 echo ________
 
 #---Copy files---#
