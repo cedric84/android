@@ -20,7 +20,7 @@ ${CC} -Wall -Werror -o./app	\
 echo ________
 ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
 echo ________
-${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager create avd -n "armv7a-api16" -k "system-images;android-16;default;armeabi-v7a"
+${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "armv7a-api16" -k "system-images;android-16;default;armeabi-v7a"
 #echo ________
 #${ANDROID_HOME}/emulator/emulator -list-avds
 #${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list target -c
