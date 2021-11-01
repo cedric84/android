@@ -19,11 +19,11 @@ ${CC} -Wall -Werror -o./app	\
 
 echo ________
 #${ANDROID_HOME}/emulator/emulator -list-avds
-${ANDROID_HOME}/tools/bin/avdmanager list target -c
+${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list target -c
 echo ________
-${ANDROID_HOME}/tools/bin/avdmanager list device -c
+${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list device -c
 echo ________
-${ANDROID_HOME}/tools/bin/avdmanager list avd -c
+${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list avd -c
 echo ________
 
 #---Copy files---#
