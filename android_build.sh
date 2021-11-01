@@ -47,7 +47,7 @@ mkdir ./sdcard
 sudo mount -o loop ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 whoami
 sudo whoami
-sudo chown $(whoami) ./sdcard
+sudo chown runner ./sdcard
 mv ./app ./sdcard
 ls -la ./sdcard
 sudo umount ./sdcard
