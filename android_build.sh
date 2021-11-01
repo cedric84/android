@@ -60,7 +60,7 @@ echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
 #${ANDROID_ADB} shell "while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;"
-while [[ -z ${ANDROID_ADB} shell getprop sys.boot_completed ]]
+while [[ -z $(${ANDROID_ADB} shell getprop sys.boot_completed) ]]
 do
 	sleep 1
 done
