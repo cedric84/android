@@ -42,15 +42,15 @@ ${ANDROID_AVDMANAGER} list avd -c
 #${ANDROID_ADB} kill-server
 #echo -ne 'whoami\npwd\nexit\n' | ${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -shell
 ${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -no-snapshot &
-#echo ________
-#sleep 120s
+echo ________
+sleep 5m
 #${ANDROID_ADB} start-server
-#${ANDROID_ADB} devices
-#echo ________
+${ANDROID_ADB} devices
+echo ________
 #ps
-echo ________
-${ANDROID_ADB} shell ls
-echo ________
+#echo ________
+#${ANDROID_ADB} shell ls
+#echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
