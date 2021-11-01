@@ -46,9 +46,8 @@ echo ________
 #LOOP_DEVICE=$(sudo losetup -f)
 #sudo losetup ${LOOP_DEVICE} ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img
 mkdir ./sdcard
-sudo chmod 777 ./sdcard
 #sudo mount ${LOOP_DEVICE} ./sdcard
-sudo mount -o loop ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
+sudo mount -o noacl -o loop ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 mv ./app ./sdcard
 sudo touch ./sdcard/coucou
 ls -la ./sdcard
