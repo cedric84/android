@@ -18,7 +18,8 @@ ${CC} -Wall -Werror -o./app	\
 	./main.c
 
 echo ________
-${ANDROID_HOME}/emulator/emulator -list-avds
+#${ANDROID_HOME}/emulator/emulator -list-avds
+${ANDROID_HOME}/tools/bin/avdmanager list
 echo ________
 
 #---Copy files---#
