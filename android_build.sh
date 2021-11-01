@@ -44,10 +44,11 @@ echo ________
 ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
 LOOP_DEVICE=$(sudo losetup -f)
-echo ${LOOP_DEVICE}
 sudo losetup ${LOOP_DEVICE} ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img
 mkdir ./sdcard
 sudo mount ${LOOP_DEVICE} ./sdcard
+mv ./app ./sdcard
+touch ./sdcard/coucou
 ls -la ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
