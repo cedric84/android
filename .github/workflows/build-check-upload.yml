@@ -20,5 +20,5 @@ jobs:
       #---
       - name: build
         run: |
-          tree
+          tree -R
           #bash ./android_build.sh
