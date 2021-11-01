@@ -16,14 +16,14 @@ jobs:
       - name: log
         run: |
           #tree -L 20 ${ANDROID_HOME}
-          printenv | grep ANDROID
-          echo ______________
-          find ${ANDROID_HOME} -name armv7a-linux-androideabi16-clang
-          echo ______________
-          find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi16-clang
+          #printenv | grep ANDROID
+          #echo ______________
+          #find ${ANDROID_HOME} -name armv7a-linux-androideabi16-clang
+          #echo ______________
+          #find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi16-clang
           
       #---
       - name: build
         run: |
           #tree -R
-          #bash ./android_build.sh
+          bash ./android_build.sh

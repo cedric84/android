@@ -12,8 +12,8 @@ ANDROID_API=16
 #${ANDROID_ADB} root
 
 #---Build---#
-#CC=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi${ANDROID_API}-clang
-CC=$(find ${ANDROID_NDK_HOME} -name armv7a-linux-androideabi${ANDROID_API}-clang)
+#CC=${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi${ANDROID_API}-clang
+CC=$(find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi${ANDROID_API}-clang)
 echo ${CC}
 ${CC} -Wall -Werror -o./app	\
 	./main.c
