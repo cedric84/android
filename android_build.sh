@@ -34,6 +34,7 @@ ${CC} -Wall -Werror -o./app	\
 ANDROID_AVDMANAGER=${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
 ANDROID_ADB=${ANDROID_HOME}/platform-tools/adb
 ANDROID_EMULATOR=${ANDROID_HOME}/emulator/emulator
+ANDROID_MKSDCARD=${ANDROID_HOME}/emulator/mksdcard
 ANDROID_AVD_NAME=armv7a-api16
 echo ________
 ${ANDROID_AVDMANAGER} list avd -c
@@ -43,17 +44,15 @@ ${ANDROID_AVDMANAGER} list avd -c
 echo ________
 ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
-#LOOP_DEVICE=$(sudo losetup -f)
-#sudo losetup ${LOOP_DEVICE} ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img
+${ANDROID_MKSDCARD} -l mySdCard 128M ./mySdCard.img
 mkdir ./sdcard
-#sudo mount ${LOOP_DEVICE} ./sdcard
-sudo mount -o loop,rw ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
+#sudo mount -o loop,rw ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
+sudo mount -o loop,rw ./mySdCard.img ./sdcard
 cp ./app ./sdcard
 sudo touch ./sdcard/coucou
 ls -la ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
-#sudo losetup -d ${LOOP_DEVICE}
 echo ________
 ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
 echo ________
