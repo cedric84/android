@@ -44,20 +44,28 @@ ${ANDROID_AVDMANAGER} list avd -c
 #ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
 mkdir ./sdcard
-sudo mount -o loop,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
+sudo mount -o loop,sync,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
 mv ./app ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
+echo ________
+mkdir ./test
+sudo mount -o loop ~/.android/avd/${ANDROID_AVD_NAME}.avd/userdata-qemu.img ./test
+ls -la ./test
+sudo umount ./test
+rmdir ./test
 echo ________
 ${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
-${ANDROID_ADB} shell ls -la /sdcard/.
+${ANDROID_ADB} shell ls -la /sdcard
 echo ________
-${ANDROID_ADB} shell ls -la /storage/.
+${ANDROID_ADB} shell ls -la /storage
 echo ________
-${ANDROID_ADB} shell ls -la /mnt/sdcard/.
+${ANDROID_ADB} shell ls -la /mnt/sdcard
+echo ________
+${ANDROID_ADB} shell ls -la /data
 echo ________
 
 #---Copy files---#
