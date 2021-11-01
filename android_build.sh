@@ -34,6 +34,7 @@ ${CC} -Wall -Werror -o./app	\
 ANDROID_AVDMANAGER=${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
 ANDROID_ADB=${ANDROID_HOME}/platform-tools/adb
 ANDROID_EMULATOR=${ANDROID_HOME}/emulator/emulator
+ANDROID_MKSDCARD=${ANDROID_HOME}/emulator/mksdcard
 ANDROID_AVD_NAME=armv7a-api16
 echo ________
 ${ANDROID_AVDMANAGER} list avd -c
@@ -43,19 +44,15 @@ ${ANDROID_AVDMANAGER} list avd -c
 #echo ________
 #ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
+${ANDROID_MKSDCARD} 128M ./mySdCard.img
 mkdir ./sdcard
-sudo mount -o loop,sync,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
+#sudo mount -o loop,sync,uid=$(echo `whoami`) ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
+sudo mount -o loop,sync,uid=$(echo `whoami`) ./mySdCard.img ./sdcard
 mv ./app ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
 echo ________
-mkdir ./test
-sudo mount -o loop ~/.android/avd/${ANDROID_AVD_NAME}.avd/userdata-qemu.img ./test
-ls -la ./test
-sudo umount ./test
-rmdir ./test
-echo ________
-${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
+${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot -sdcard ./mySdCard.img &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
