@@ -37,16 +37,16 @@ ANDROID_EMULATOR=${ANDROID_HOME}/emulator/emulator
 echo ________
 ${ANDROID_AVDMANAGER} list avd -c
 echo ________
-${ANDROID_ADB} kill-server
-${ANDROID_ADB} start-server
-sleep 10
-#${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -shell
-${ANDROID_EMULATOR} -avd armv7a-api16 -no-window &
+#${ANDROID_ADB} kill-server
+#${ANDROID_ADB} start-server
+#sleep 10
+echo -ne 'whoamis\npwd\nexit\n' | ${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -shell
+#${ANDROID_EMULATOR} -avd armv7a-api16 -no-window &
 echo ________
-${ANDROID_ADB} devices
-echo ________
-ps
-echo ________
+#${ANDROID_ADB} devices
+#echo ________
+#ps
+#echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
