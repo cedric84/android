@@ -34,10 +34,10 @@ ${CC} -Wall -Werror -o./app	\
 echo ________
 ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list avd -c
 echo ________
-${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window -shell
+#${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window -shell
+${ANDROID_HOME}/emulator/emulator -avd armv7a-api16 -no-window &
 echo ________
-pwd
-whoami
+${ANDROID_HOME}/platform-tools/adb devices -l
 echo ________
 
 #---Copy files---#
