@@ -15,7 +15,7 @@ jobs:
       #---
       - name: log
         run: |
-          tree -R ${ANDROID_HOME}
+          tree ${ANDROID_HOME}
           
       #---
       - name: build
