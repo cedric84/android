@@ -34,12 +34,16 @@ ${CC} -Wall -Werror -o./app	\
 ANDROID_AVDMANAGER=${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
 ANDROID_ADB=${ANDROID_HOME}/platform-tools/adb
 ANDROID_EMULATOR=${ANDROID_HOME}/emulator/emulator
+ANDROID_AVD_NAME=armv7a-api16
 echo ________
 ${ANDROID_AVDMANAGER} list avd -c
 #echo ________
 #find / -name .emulator_console_auth_token
 #echo ________
-${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -no-audio -no-snapshot &
+echo ________
+ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
+echo ________
+${ANDROID_EMULATOR} -avd ${ANDROID_AVD_NAME} -no-window -no-audio -no-snapshot &
 echo ________
 ${ANDROID_ADB} wait-for-device
 ${ANDROID_ADB} devices
