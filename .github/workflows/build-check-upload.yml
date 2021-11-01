@@ -21,7 +21,8 @@ jobs:
           #find ${ANDROID_HOME} -name armv7a-linux-androideabi16-clang
           #echo ______________
           #find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi16-clang
-          find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake
+          TEST=$(find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake)
+          cat ${TEST}
           
       #---
       - name: build
