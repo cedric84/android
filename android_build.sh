@@ -36,19 +36,21 @@ ANDROID_ADB=${ANDROID_HOME}/platform-tools/adb
 ANDROID_EMULATOR=${ANDROID_HOME}/emulator/emulator
 echo ________
 ${ANDROID_AVDMANAGER} list avd -c
-echo ________
-find / -name .emulator_console_auth_token
-echo ________
+#echo ________
+#find / -name .emulator_console_auth_token
+#echo ________
 #${ANDROID_ADB} kill-server
 #echo -ne 'whoami\npwd\nexit\n' | ${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -shell
-#${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -no-boot-anim &
+${ANDROID_EMULATOR} -avd armv7a-api16 -no-window -no-snapshot &
 #echo ________
 #sleep 120s
 #${ANDROID_ADB} start-server
 #${ANDROID_ADB} devices
 #echo ________
 #ps
-#echo ________
+echo ________
+${ANDROID_ADB} shell ls
+echo ________
 
 #---Copy files---#
 #${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
