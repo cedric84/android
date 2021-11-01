@@ -5,14 +5,16 @@
 #ANDROID_EMULATOR_SN=emulator-5554
 #ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s ${ANDROID_EMULATOR_SN}"
 #ANDROID_DEST_PATH=/data/local
-#ANDROID_API=16
+ANDROID_API=16
 #ANDROID_API=24
 
 #---Restart as root---#
 #${ANDROID_ADB} root
 
 #---Build---#
-CC=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi${ANDROID_API}-clang
+#CC=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi${ANDROID_API}-clang
+CC=$(find ${ANDROID_NDK_HOME} -name armv7a-linux-androideabi${ANDROID_API}-clang)
+echo ${CC}
 ${CC} -Wall -Werror -o./app	\
 	./main.c
 
