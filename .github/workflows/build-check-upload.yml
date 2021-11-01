@@ -8,5 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       #---
-      cd ${ANDROID_HOME}
-      ls
+      - name: log
+        run: |
+          cd ${ANDROID_HOME}
+          ls
