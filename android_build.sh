@@ -43,7 +43,7 @@ ${ANDROID_AVDMANAGER} list avd -c
 echo ________
 ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
-sudo losetup -f /dev/loop0 ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img
+sudo losetup /dev/loop0 ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img
 mkdir ./sdcard
 sudo mount /dev/loop0 ./sdcard
 ls -la ./sdcard
