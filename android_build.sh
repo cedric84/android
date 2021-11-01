@@ -9,9 +9,6 @@ ANDROID_API=16
 #ANDROID_API=24
 MY_PREFIX=armv7a-linux-androideabi${ANDROID_API}-
 
-#---Restart as root---#
-#${ANDROID_ADB} root
-
 #---Build---#
 CC=$(find ${ANDROID_NDK_LATEST_HOME} -name ${MY_PREFIX}clang)
 ${CC} -Wall -Werror -o./app	\
@@ -64,13 +61,14 @@ ${ANDROID_ADB} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; 
 #${ANDROID_ADB} shell /mnt/sdcard/app
 #echo ________
 
+#---Restart as root---#
+${ANDROID_ADB} root
+
 #---Copy files---#
 ${ANDROID_ADB} push ./app ${ANDROID_DEST_PATH}
 
 #---Run---#
-#${ANDROID_ADB} shell date
 ${ANDROID_ADB} shell ${ANDROID_DEST_PATH}/app
-#${ANDROID_ADB} shell date
 
 #---Remove the application---#
 #${ANDROID_ADB} shell rm ${ANDROID_DEST_PATH}/app
