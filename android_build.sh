@@ -45,7 +45,10 @@ ls -la ~/.android/avd/${ANDROID_AVD_NAME}.avd
 echo ________
 mkdir ./sdcard
 sudo mount -o loop ~/.android/avd/${ANDROID_AVD_NAME}.avd/sdcard.img ./sdcard
-sudo mv ./app ./sdcard
+whoami
+sudo whoami
+sudo chown $(whoami) ./sdcard
+mv ./app ./sdcard
 ls -la ./sdcard
 sudo umount ./sdcard
 rmdir ./sdcard
