@@ -1,0 +1,12 @@
+name: build & check the application
+on:
+  push:
+    branches:
+      - ci
+jobs:
+  ubuntu-build:
+    runs-on: ubuntu-latest
+    steps:
+      #---
+      cd ${ANDROID_HOME}
+      ls
