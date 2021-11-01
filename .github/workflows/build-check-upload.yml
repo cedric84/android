@@ -16,7 +16,7 @@ jobs:
       - name: log
         run: |
           #tree -L 20 ${ANDROID_HOME}
-          printenv
+          printenv | grep ANDROID
           find ${ANDROID_HOME} -name armv7a-linux-androideabi16-clang
           find ${ANDROID_NDK_HOME} -name armv7a-linux-androideabi16-clang
           
