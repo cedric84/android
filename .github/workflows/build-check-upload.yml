@@ -24,7 +24,12 @@ jobs:
 #          TEST=$(find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake)
 #          cat ${TEST}
           
-      #---
+      #---Install---#
+      - name: install
+        run: |
+          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
+
+      #---Build---#
       - name: build
         run: |
           bash ./android_build.sh
