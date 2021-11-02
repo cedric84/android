@@ -1,10 +1,5 @@
 #! /bin/bash
 
-echo ________
-echo ${MY_HELLO}
-echo ________
-exit 1
-
 #---Definitions---#
 MY_ANDROID_AVDMANAGER=${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
 MY_ANDROID_ADB=${ANDROID_HOME}/platform-tools/adb
@@ -13,7 +8,7 @@ MY_ANDROID_MKSDCARD=${ANDROID_HOME}/emulator/mksdcard
 MY_ANDROID_DEST_PATH=/data/local
 
 MY_ANDROID_API0=16
-MY_ANDROID_AVD_NAME0=armv7a-api16
+#MY_ANDROID_AVD_NAME0=armv7a-api16
 MY_ANDROID_EMULATOR_PORT0=5554
 MY_ANDROID_EMULATOR_SN0=emulator-${MY_ANDROID_EMULATOR_PORT0}
 MY_PREFIX0=armv7a-linux-androideabi${MY_ANDROID_API0}-
@@ -21,7 +16,7 @@ MY_CC0=$(find ${ANDROID_NDK_LATEST_HOME} -name ${MY_PREFIX0}clang)
 MY_APP0=${MY_PREFIX0}app
 
 MY_ANDROID_API1=24
-MY_ANDROID_AVD_NAME1=armv7a-api24
+#MY_ANDROID_AVD_NAME1=armv7a-api24
 MY_ANDROID_EMULATOR_PORT1=5556
 MY_ANDROID_EMULATOR_SN1=emulator-${MY_ANDROID_EMULATOR_PORT1}
 MY_PREFIX1=armv7a-linux-androideabi${MY_ANDROID_API1}-
