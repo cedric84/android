@@ -27,6 +27,9 @@ MY_APP1=${MY_PREFIX1}app
 ${MY_CC0} -Wall -Werror -o./${MY_APP0} ./main.c
 ${MY_CC1} -Wall -Werror -o./${MY_APP1} ./main.c
 
+echo ________
+echo ${MY_HELLO}
+echo ________
 #echo ________
 #${ANDROID_HOME}/emulator/emulator -list-avds
 #${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager list target -c
