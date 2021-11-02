@@ -6,6 +6,8 @@ on:
 jobs:
   ubuntu-build:
     runs-on: ubuntu-latest
+    env:
+      MY_HELLO: hello, world !
     steps:
 
       #---Checkout current repository---#
@@ -26,8 +28,6 @@ jobs:
           
       #---Prerequisites---#
       - name: install
-        env:
-          MY_HELLO: hello, world !
         run: |
           echo "hey ! ${MY_HELLO}"
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
