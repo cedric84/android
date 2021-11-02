@@ -29,14 +29,14 @@ jobs:
         run: |
           ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
           ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
-      - name: create avd
+      - name: create AVDs
         run: |
+          export MY_HELLO=hello
           echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "armv7a-api16" -k "system-images;android-16;default;armeabi-v7a"
           echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "armv7a-api24" -k "system-images;android-24;default;armeabi-v7a"
 
       #---Build---#
       - name: build
         run: |
-          export MY_HELLO=hello
           bash ./android_build.sh
           tree -R
