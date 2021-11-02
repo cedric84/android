@@ -28,11 +28,11 @@ jobs:
       - name: install
         run: |
           ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
-          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-31;default;x86_64"
+          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
       - name: create avd
         run: |
           echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "armv7a-api16" -k "system-images;android-16;default;armeabi-v7a"
-          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "x86_64-api31" -k "system-images;android-31;default;x86_64"
+          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "armv7a-api24" -k "system-images;android-24;default;armeabi-v7a"
 
       #---Build---#
       - name: build
