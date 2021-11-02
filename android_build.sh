@@ -13,7 +13,7 @@ MY_ANDROID_EMULATOR_PORT0=5554
 MY_ANDROID_EMULATOR_SN0=emulator-${MY_ANDROID_EMULATOR_PORT0}
 MY_PREFIX0=armv7a-linux-androideabi${MY_ANDROID_API0}-
 MY_CC0=$(find ${ANDROID_NDK_LATEST_HOME} -name ${MY_PREFIX0}clang)
-MY_APP0=${MY_PREFIX0}-app
+MY_APP0=${MY_PREFIX0}app
 
 MY_ANDROID_API1=24
 MY_ANDROID_AVD_NAME1=armv7a-api24
@@ -21,7 +21,7 @@ MY_ANDROID_EMULATOR_PORT1=5556
 MY_ANDROID_EMULATOR_SN1=emulator-${MY_ANDROID_EMULATOR_PORT1}
 MY_PREFIX1=armv7a-linux-android${MY_ANDROID_API1}-
 MY_CC1=$(find ${ANDROID_NDK_LATEST_HOME} -name ${MY_PREFIX1}clang)
-MY_APP1=${MY_PREFIX1}-app
+MY_APP1=${MY_PREFIX1}app
 
 #---Build---#
 ${MY_CC0} -Wall -Werror -o./${MY_APP0} ./main.c
@@ -53,6 +53,10 @@ ${MY_CC1} -Wall -Werror -o./${MY_APP1} ./main.c
 ${MY_ANDROID_EMULATOR} -avd ${MY_ANDROID_AVD_NAME0} -port ${MY_ANDROID_EMULATOR_PORT0} -no-window -no-audio -no-snapshot &
 ${MY_ANDROID_EMULATOR} -avd ${MY_ANDROID_AVD_NAME1} -port ${MY_ANDROID_EMULATOR_PORT1} -no-window -no-audio -no-snapshot &
 
+#---Restart as root---#
+${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} root
+${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} root
+
 #---Wait for the emulator to be ready---#
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} wait-for-device
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} wait-for-device
@@ -62,10 +66,6 @@ echo ________
 #${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} shell 'while [[ -z $(ls /sdcard/) ]]; do sleep 1; done;'
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
-
-#---Restart as root---#
-${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} root
-${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} root
 
 #---Copy files---#
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} push ./${MY_APP0} ${MY_ANDROID_DEST_PATH}
