@@ -39,8 +39,6 @@ jobs:
 
       #---Build---#
       - name: build
-        env:
-          MY_HELLO: ${{install.MY_HELLO}}
         run: |
           bash ./android_build.sh
           tree -R
