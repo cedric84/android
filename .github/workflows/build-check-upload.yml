@@ -25,8 +25,11 @@ jobs:
 #          cat ${TEST}
           
       #---Prerequisites---#
-#      - name: install
-#        run: |
+      - name: install
+        env:
+          MY_HELLO: hello, world !
+        run: |
+          echo "hey ! ${MY_HELLO}"
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
 #      - name: create AVDs
@@ -37,7 +40,7 @@ jobs:
       #---Build---#
       - name: build
         env:
-          MY_HELLO: hello, world !
+          MY_HELLO: ${{install.MY_HELLO}}
         run: |
           bash ./android_build.sh
           tree -R
