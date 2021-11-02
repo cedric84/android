@@ -19,7 +19,7 @@ MY_ANDROID_API1=24
 MY_ANDROID_AVD_NAME1=armv7a-api24
 MY_ANDROID_EMULATOR_PORT1=5556
 MY_ANDROID_EMULATOR_SN1=emulator-${MY_ANDROID_EMULATOR_PORT1}
-MY_PREFIX1=armv7a-linux-android${MY_ANDROID_API1}-
+MY_PREFIX1=armv7a-linux-androideabi${MY_ANDROID_API1}-
 MY_CC1=$(find ${ANDROID_NDK_LATEST_HOME} -name ${MY_PREFIX1}clang)
 MY_APP1=${MY_PREFIX1}app
 
@@ -53,16 +53,18 @@ ${MY_CC1} -Wall -Werror -o./${MY_APP1} ./main.c
 ${MY_ANDROID_EMULATOR} -avd ${MY_ANDROID_AVD_NAME0} -port ${MY_ANDROID_EMULATOR_PORT0} -no-window -no-audio -no-snapshot &
 ${MY_ANDROID_EMULATOR} -avd ${MY_ANDROID_AVD_NAME1} -port ${MY_ANDROID_EMULATOR_PORT1} -no-window -no-audio -no-snapshot &
 
-#---Restart as root---#
-${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} root
-${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} root
-
-#---Wait for the emulator to be ready---#
+#---Wait for the emulators to be online---#
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} wait-for-device
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} wait-for-device
 echo ________
 ${MY_ANDROID_ADB} devices
 echo ________
+
+#---Restart as root---#
+${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} root
+${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} root
+
+#---Wait for the emulator to be ready---#
 #${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} shell 'while [[ -z $(ls /sdcard/) ]]; do sleep 1; done;'
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN0} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
 ${MY_ANDROID_ADB} -s ${MY_ANDROID_EMULATOR_SN1} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
