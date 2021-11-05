@@ -9,7 +9,6 @@ jobs:
     env:
       MY_ANDROID_AVD_NAME0: armv7a-api16
       MY_ANDROID_AVD_NAME1: armv7a-api24
-      MY_TEST: (1234 5678)
     steps:
 
       #---Checkout current repository---#
@@ -33,7 +32,7 @@ jobs:
         run: |
           for c in 0 1
           do
-          	echo $MY_TEST[1]
+          	echo ${MY_ANDROID_AVD_NAME!c}
           done
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
