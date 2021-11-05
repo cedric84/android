@@ -9,6 +9,8 @@ jobs:
     env:
       MY_ANDROID_AVD_NAME0: armv7a-api16
       MY_ANDROID_AVD_NAME1: armv7a-api24
+      MY_TEST[a]: 1234
+      MY_TEST[b]: 5678
     steps:
 
       #---Checkout current repository---#
@@ -30,15 +32,19 @@ jobs:
       #---Prerequisites---#
       - name: install
         run: |
-          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
-          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
-      - name: create AVDs
-        run: |
-          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME0}" -k "system-images;android-16;default;armeabi-v7a"
-          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME1}" -k "system-images;android-24;default;armeabi-v7a"
+          for c in "a b"
+          do
+          	echo $c
+          done
+#          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
+#          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
+#      - name: create AVDs
+#        run: |
+#          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME0}" -k "system-images;android-16;default;armeabi-v7a"
+#          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME1}" -k "system-images;android-24;default;armeabi-v7a"
 
       #---Build---#
-      - name: build
-        run: |
-          bash ./android_build.sh
-          tree -R
+#      - name: build
+#        run: |
+#          bash ./android_build.sh
+#          tree -R
