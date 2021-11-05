@@ -32,7 +32,7 @@ jobs:
       #---Prerequisites---#
       - name: install
         run: |
-          for c in "a b"
+          for c in a b
           do
           	echo $c
           done
