@@ -9,8 +9,8 @@ jobs:
     env:
       MY_ANDROID_AVD_NAME0: armv7a-api16
       MY_ANDROID_AVD_NAME1: armv7a-api24
-      MY_TEST[a]: 1234
-      MY_TEST[b]: 5678
+      MY_TEST[0]: 1234
+      MY_TEST[1]: 5678
     steps:
 
       #---Checkout current repository---#
@@ -32,7 +32,7 @@ jobs:
       #---Prerequisites---#
       - name: install
         run: |
-          for c in a b
+          for c in 0 1
           do
           	echo ${MY_TEST[$c]}
           done
