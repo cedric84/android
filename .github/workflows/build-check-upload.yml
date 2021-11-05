@@ -34,7 +34,7 @@ jobs:
         run: |
           for c in 0 1
           do
-          	echo ${MY_TEST[${c}]}
+          	echo ${MY_TEST}[${c}]
           done
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
