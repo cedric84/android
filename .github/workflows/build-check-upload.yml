@@ -11,6 +11,7 @@ jobs:
       MY_ANDROID_AVD_NAME1: armv7a-api24
       MY_TEST_A: 1234
       MY_TEST_B: 5678
+      MY_TEST_C: ["1234", "5678"]
     steps:
 
       #---Checkout current repository---#
@@ -34,7 +35,7 @@ jobs:
         run: |
           for c in 0 1
           do
-          	echo ${MY_ANDROID_AVD_NAME${c}}
+          	echo ${MY_TEST_C}
           done
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
