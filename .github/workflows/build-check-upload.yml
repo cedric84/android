@@ -34,7 +34,7 @@ jobs:
           for idx in ${MY_ANDROID_INDICES}
           do
             MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
-            echo "::group::installing ${!MY_ANDROID_SYSTEM_IMAGE}"
+            echo "::group::${!MY_ANDROID_SYSTEM_IMAGE}"
             ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "${!MY_ANDROID_SYSTEM_IMAGE}"
             echo "::endgroup::"
           done
@@ -49,6 +49,8 @@ jobs:
             MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
             MY_ANDROID_EMULATOR_PORT=MY_ANDROID_EMULATOR_PORT${idx}
             MY_ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s emulator-${!MY_ANDROID_EMULATOR_PORT}"
+            #---Log---#
+            echo "::group::${!MY_ANDROID_AVD_NAME}"
             #---Create---#
             echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${!MY_ANDROID_AVD_NAME}" -k "${!MY_ANDROID_SYSTEM_IMAGE}"
             #---Start---#
@@ -57,6 +59,8 @@ jobs:
             ${MY_ANDROID_ADB} wait-for-device
             #---Restart as root---
             ${MY_ANDROID_ADB} root
+            #---Log---#
+            echo "::endgroup::"
           done
           unset MY_ANDROID_AVD_NAME MY_ANDROID_SYSTEM_IMAGE MY_ANDROID_EMULATOR_PORT MY_ANDROID_ADB
 
@@ -83,6 +87,8 @@ jobs:
             MY_ANDROID_EMULATOR_PORT=MY_ANDROID_EMULATOR_PORT${idx}
             MY_ANDROID_DEST_PATH=MY_ANDROID_DEST_PATH${idx}
             MY_ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s emulator-${!MY_ANDROID_EMULATOR_PORT}"
+            #---Log---#
+            echo "::group::${!MY_ANDROID_TRIPLET}"
             #---Wait for the emulator to be online---#
             ${MY_ANDROID_ADB} wait-for-device
             #---Wait for the emulator to be ready---#
@@ -91,6 +97,8 @@ jobs:
             ${MY_ANDROID_ADB} push ./${!MY_ANDROID_TRIPLET}-app ${!MY_ANDROID_DEST_PATH}
             #---Run---#
             ${MY_ANDROID_ADB} shell ${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app
+            #---Log---#
+            echo "::endgroup::"
           done
           unset MY_ANDROID_TRIPLET MY_ANDROID_EMULATOR_PORT MY_ANDROID_DEST_PATH MY_ANDROID_ADB
 

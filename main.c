@@ -18,5 +18,5 @@ main(int argc, char* argv[])
 {
 	printf("%s started (API #%d)\n", __func__, __ANDROID_API__);
 	printf("%s terminated\n", __func__);
-	return EXIT_SUCCESS;
+	return (16 == __ANDROID_API__) ? EXIT_FAILURE : EXIT_SUCCESS;
 }
