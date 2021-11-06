@@ -84,7 +84,7 @@ jobs:
             MY_ANDROID_TRIPLET=MY_ANDROID_TRIPLET${idx}
             MY_ANDROID_EMULATOR_PORT=MY_ANDROID_EMULATOR_PORT${idx}
             MY_ANDROID_DEST_PATH=MY_ANDROID_DEST_PATH${idx}
-            MY_ANDROID_ADB=${ANDROID_HOME}/platform-tools/adb -s emulator-${!MY_ANDROID_EMULATOR_PORT}
+            MY_ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s emulator-${!MY_ANDROID_EMULATOR_PORT}"
             #---Wait for the emulators to be online---#
             ${MY_ANDROID_ADB} wait-for-device
             #---Restart as root---
