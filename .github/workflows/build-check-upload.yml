@@ -22,11 +22,17 @@ jobs:
       #---Android API #2---#
       MY_ANDROID_AVD_NAME2:      ${{ 'arm64v8a-api31' }}
       MY_ANDROID_SYSTEM_IMAGE2:  ${{ 'system-images;android-31;default;arm64-v8a' }}
+      MY_ANDROID_TRIPLET2:       ${{ 'aarch64-linux-android31' }}
+      MY_ANDROID_EMULATOR_PORT2: ${{ '5558' }}
+      MY_ANDROID_DEST_PATH2:     ${{ '/data/local' }}
       #---Android API #3---#
       MY_ANDROID_AVD_NAME3:      ${{ 'x86_64-api31' }}
       MY_ANDROID_SYSTEM_IMAGE3:  ${{ 'system-images;android-31;default;x86_64' }}
+      MY_ANDROID_TRIPLET3:       ${{ 'x86_64-linux-android31' }}
+      MY_ANDROID_EMULATOR_PORT3: ${{ '5560' }}
+      MY_ANDROID_DEST_PATH3:     ${{ '/data/local' }}
       #---Android API generic---#
-      MY_ANDROID_INDICES:        ${{ '0' }}
+      MY_ANDROID_INDICES:        ${{ '0 1 2 3' }}
       MY_ANDROID_ENABLED:        ${{ !false }}
     steps:
       #---Checkout current repository---#
@@ -102,8 +108,7 @@ jobs:
             #---Copy files---
             ${MY_ANDROID_ADB} push ./${!MY_ANDROID_TRIPLET}-app ${!MY_ANDROID_DEST_PATH}
             #---Run---#
-            ${MY_ANDROID_ADB} shell '${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app; if [ $? -ne 0 ]; then exit 1; fi'
-            if [ $? -ne 0 ]; then exit 1; fi
+            ${MY_ANDROID_ADB} shell ${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app
             #---Log---#
             echo "::endgroup::"
           done
