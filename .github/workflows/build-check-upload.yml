@@ -21,7 +21,7 @@ jobs:
       MY_ANDROID_DEST_PATH1:     ${{ '/data/local' }}
       #---Android API generic---#
       MY_ANDROID_INDICES:        ${{ '0 1' }}
-      MY_ANDROID_ENABLED:        ${{ false }}
+      MY_ANDROID_ENABLED:        ${{ !false }}
     steps:
       #---Checkout current repository---#
       - name: checkout
@@ -34,7 +34,9 @@ jobs:
           for idx in ${MY_ANDROID_INDICES}
           do
             MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
+            ::group::installing ${!MY_ANDROID_SYSTEM_IMAGE}
             ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "${!MY_ANDROID_SYSTEM_IMAGE}"
+            ::endgroup::
           done
           unset MY_ANDROID_SYSTEM_IMAGE
       - name: create & start Android virtual devices
