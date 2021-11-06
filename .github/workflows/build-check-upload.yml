@@ -97,7 +97,7 @@ jobs:
             ${MY_ANDROID_ADB} push ./${!MY_ANDROID_TRIPLET}-app ${!MY_ANDROID_DEST_PATH}
             #---Run---#
             ${MY_ANDROID_ADB} shell ${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app
-            if [ $? -ne 0 ]; then; exit 1; fi
+            if [ $? -ne 0 ]; then exit 1; fi
             #---Log---#
             echo "::endgroup::"
           done
