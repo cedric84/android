@@ -108,7 +108,9 @@ jobs:
             #---Copy files---
             ${MY_ANDROID_ADB} push ./${!MY_ANDROID_TRIPLET}-app ${!MY_ANDROID_DEST_PATH}
             #---Run---#
-            ${MY_ANDROID_ADB} shell ${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app; "echo $?"
+            MY_ANDROID_RUN_CMD="${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app; echo \$?"
+            ${MY_ANDROID_ADB} shell ${MY_ANDROID_RUN_CMD}
+            if [ $? -ne 0 ]; then echo nok; exit 1; fi
             #---Log---#
             echo "::endgroup::"
           done
