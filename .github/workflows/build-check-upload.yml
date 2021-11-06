@@ -33,7 +33,7 @@ jobs:
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
-          	MY_ANDROID_AVD_NAME=${MY_ANDROID_AVD_NAME}${idx}
+          	MY_ANDROID_AVD_NAME=MY_ANDROID_AVD_NAME${idx}
           	echo ${MY_ANDROID_AVD_NAME}
           done
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
