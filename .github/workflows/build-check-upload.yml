@@ -7,6 +7,8 @@ jobs:
   ubuntu-build:
     runs-on: ubuntu-latest
     env:
+      MY_ANDROID_SDK_MANAGER:   ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager
+      MY_ANDROID_AVD_MANAGER:   ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
       MY_ANDROID_AVD_NAME0:     armv7a-api16
       MY_ANDROID_SYSTEM_IMAGE0:	system-images;android-16;default;armeabi-v7a
       MY_ANDROID_AVD_NAME1:     armv7a-api24
@@ -36,13 +38,16 @@ jobs:
           for idx in ${MY_ANDROID_INDICES}
           do
           	MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
-          	echo ${!MY_ANDROID_SYSTEM_IMAGE}
-          	${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "${!MY_ANDROID_SYSTEM_IMAGE}"
+          	${MY_ANDROID_SDK_MANAGER} "${!MY_ANDROID_SYSTEM_IMAGE}"
           done
-#          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
-#          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
-#      - name: create AVDs
-#        run: |
+      - name: create AVDs
+        run: |
+          for idx in ${MY_ANDROID_INDICES}
+          do
+          	MY_ANDROID_AVD_NAME=MY_ANDROID_AVD_NAME${idx}
+          	MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
+            echo -ne '\n' | ${MY_ANDROID_AVD_MANAGER} -s create avd -n "${!MY_ANDROID_AVD_NAME}" -k "${!MY_ANDROID_SYSTEM_IMAGE}"
+          done
 #          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME0}" -k "system-images;android-16;default;armeabi-v7a"
 #          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME1}" -k "system-images;android-24;default;armeabi-v7a"
 
