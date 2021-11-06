@@ -29,7 +29,7 @@ jobs:
 
       #---Prepare for Android---#
       - name: install Android system images
-        if: ${{ false != env.MY_ANDROID_ENABLED }}
+        if: ${{ false != fromJSON(env.MY_ANDROID_ENABLED) }}
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
