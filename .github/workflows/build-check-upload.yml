@@ -20,7 +20,7 @@ jobs:
       MY_ANDROID_EMULATOR_PORT1: ${{ '5556' }}
       MY_ANDROID_DEST_PATH1:     ${{ '/data/local' }}
       #---Android API generic---#
-      MY_ANDROID_INDICES:        ${{ '0 1' }}
+      MY_ANDROID_INDICES:        ${{ '0' }}
       MY_ANDROID_ENABLED:        ${{ !false }}
     steps:
       #---Checkout current repository---#
@@ -96,7 +96,8 @@ jobs:
             #---Copy files---
             ${MY_ANDROID_ADB} push ./${!MY_ANDROID_TRIPLET}-app ${!MY_ANDROID_DEST_PATH}
             #---Run---#
-            ${MY_ANDROID_ADB} shell ${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app
+#            ${MY_ANDROID_ADB} shell '${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app'
+            ${MY_ANDROID_ADB} shell '${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app; if [ $? -ne 0 ]; then exit 1; fi'
             if [ $? -ne 0 ]; then exit 1; fi
             #---Log---#
             echo "::endgroup::"
