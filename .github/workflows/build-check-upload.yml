@@ -7,8 +7,6 @@ jobs:
   ubuntu-build:
     runs-on: ubuntu-latest
     env:
-      MY_ANDROID_SDK_MANAGER:   ${{ANDROID_HOME}}/cmdline-tools/latest/bin/sdkmanager
-      MY_ANDROID_AVD_MANAGER:   ${{ANDROID_HOME}}/cmdline-tools/latest/bin/avdmanager
       MY_ANDROID_AVD_NAME0:     armv7a-api16
       MY_ANDROID_SYSTEM_IMAGE0:	system-images;android-16;default;armeabi-v7a
       MY_ANDROID_AVD_NAME1:     armv7a-api24
@@ -34,6 +32,9 @@ jobs:
           
       #---Prerequisites---#
       - name: install
+        env:
+          MY_ANDROID_SDK_MANAGER: ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager
+          MY_ANDROID_AVD_MANAGER: ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
