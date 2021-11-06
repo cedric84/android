@@ -76,6 +76,7 @@ jobs:
             ${MY_CC} -Wall -Werror -o./${!MY_ANDROID_TRIPLET}-app ./main.c
           done
           unset MY_ANDROID_TRIPLET MY_CC
+          tree -R .
 
       #---Run---#
       - name: run
