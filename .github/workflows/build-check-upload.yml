@@ -7,8 +7,9 @@ jobs:
   ubuntu-build:
     runs-on: ubuntu-latest
     env:
-#      MY_ANDROID_AVD_NAME_ARR: armv7a-api16 armv7a-api24
-      MY_ANDROID_AVD_NAME_ARR: [hello, world]
+      MY_ANDROID_AVD_NAME0: armv7a-api16
+      MY_ANDROID_AVD_NAME1: armv7a-api24
+      MY_ANDROID_INDICES: 0 1
     steps:
 
       #---Checkout current repository---#
@@ -30,9 +31,9 @@ jobs:
       #---Prerequisites---#
       - name: install
         run: |
-          for c in ${MY_ANDROID_AVD_NAME_ARR}
+          for idx in ${MY_ANDROID_INDICES}
           do
-          	echo ${c}
+          	echo ${MY_ANDROID_AVD_NAME%c}
           done
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-16;default;armeabi-v7a"
 #          ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;default;armeabi-v7a"
