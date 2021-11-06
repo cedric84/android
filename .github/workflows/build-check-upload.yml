@@ -52,7 +52,7 @@ jobs:
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
-#           ---Definitions---
+            #---Definitions---#
             MY_ANDROID_AVD_NAME=MY_ANDROID_AVD_NAME${idx}
             MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
             MY_ANDROID_EMULATOR_PORT=MY_ANDROID_EMULATOR_PORT${idx}
