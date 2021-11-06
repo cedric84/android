@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
 #      MY_ANDROID_AVD_NAME_ARR: armv7a-api16 armv7a-api24
-      MY_ANDROID_AVD_NAME_ARR[0]: heelo
+      MY_ANDROID_AVD_NAME_ARR: [hello, world]
     steps:
 
       #---Checkout current repository---#
