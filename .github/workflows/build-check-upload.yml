@@ -22,6 +22,7 @@ jobs:
       #---Android API generic---#
       MY_ANDROID_INDICES:        ${{ '0 1' }}
       MY_ANDROID_ENABLED:        ${{ !false }}
+      MY_ANDROID_BUILD_ONLY:     ${{ !false }}
     steps:
       #---Checkout current repository---#
       - name: checkout
@@ -29,7 +30,7 @@ jobs:
 
       #---Prepare for Android---#
       - name: install Android system images
-        if: ${{ false != fromJSON(env.MY_ANDROID_ENABLED) }}
+        if: ${{ (false != fromJSON(env.MY_ANDROID_ENABLED)) && (false == fromJSON(env.MY_ANDROID_BUILD_ONLY)) }}
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
@@ -40,7 +41,7 @@ jobs:
           done
           unset MY_ANDROID_SYSTEM_IMAGE
       - name: create & start Android virtual devices
-        if: ${{ false != fromJSON(env.MY_ANDROID_ENABLED) }}
+        if: ${{ (false != fromJSON(env.MY_ANDROID_ENABLED)) && (false == fromJSON(env.MY_ANDROID_BUILD_ONLY)) }}
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
@@ -78,7 +79,7 @@ jobs:
 
       #---Run---#
       - name: run
-        if: ${{ false != fromJSON(env.MY_ANDROID_ENABLED) }}
+        if: ${{ (false != fromJSON(env.MY_ANDROID_ENABLED)) && (false == fromJSON(env.MY_ANDROID_BUILD_ONLY)) }}
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
