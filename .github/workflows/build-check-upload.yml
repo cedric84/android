@@ -33,7 +33,7 @@ jobs:
       #---Prerequisites---#
       - name: install
         env:
-          MY_ANDROID_SDK_MANAGER: ${{runner.os.ANDROID_HOME}}/cmdline-tools/latest/bin/sdkmanager
+          MY_ANDROID_SDK_MANAGER: ${{env.ANDROID_HOME}}/cmdline-tools/latest/bin/sdkmanager
           MY_ANDROID_AVD_MANAGER: ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
         run: |
           for idx in ${MY_ANDROID_INDICES}
