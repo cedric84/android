@@ -11,34 +11,21 @@ jobs:
       MY_ANDROID_AVD_NAME0:      ${{ 'armv7a-api16' }}
       MY_ANDROID_SYSTEM_IMAGE0:  ${{ 'system-images;android-16;default;armeabi-v7a' }}
       MY_ANDROID_TRIPLET0:       ${{ 'armv7a-linux-androideabi16' }}
-      MY_ANDROID_EMULATOR_PORT0: ${{ 5554 }}
+      MY_ANDROID_EMULATOR_PORT0: ${{ '5554' }}
       MY_ANDROID_DEST_PATH0:     ${{ '/data/local' }}
       #---Android API #1---#
       MY_ANDROID_AVD_NAME1:      ${{ 'armv7a-api24' }}
       MY_ANDROID_SYSTEM_IMAGE1:  ${{ 'system-images;android-24;default;armeabi-v7a' }}
       MY_ANDROID_TRIPLET1:       ${{ 'armv7a-linux-androideabi24' }}
-      MY_ANDROID_EMULATOR_PORT1: ${{ 5556 }}
+      MY_ANDROID_EMULATOR_PORT1: ${{ '5556' }}
       MY_ANDROID_DEST_PATH1:     ${{ '/data/local' }}
       #---Android API list---#
       MY_ANDROID_INDICES:        ${{ '0 1' }}
     steps:
-
       #---Checkout current repository---#
       - name: checkout
         uses: actions/checkout@v2
 
-      #---
-#      - name: log
-#        run: |
-#          tree -L 20 ${ANDROID_HOME}
-#          printenv | grep ANDROID
-#          echo ______________
-#          find ${ANDROID_HOME} -name armv7a-linux-androideabi16-clang
-#          echo ______________
-#          find ${ANDROID_NDK_LATEST_HOME} -name armv7a-linux-androideabi16-clang
-#          TEST=$(find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake)
-#          cat ${TEST}
-          
       #---Prepare for Android---#
       - name: install Android system images
         run: |
@@ -73,7 +60,6 @@ jobs:
             ${MY_CC} -Wall -Werror -o./${!MY_ANDROID_TRIPLET}-app ./main.c
           done
           unset MY_ANDROID_TRIPLET MY_CC
-#          tree -R
 
       #---Run---#
       - name: run
@@ -85,14 +71,21 @@ jobs:
             MY_ANDROID_EMULATOR_PORT=MY_ANDROID_EMULATOR_PORT${idx}
             MY_ANDROID_DEST_PATH=MY_ANDROID_DEST_PATH${idx}
             MY_ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s emulator-${!MY_ANDROID_EMULATOR_PORT}"
-            #---Wait for the emulators to be online---#
+            #---Wait for the emulator to be online---#
             ${MY_ANDROID_ADB} wait-for-device
             #---Restart as root---
+            echo "hello0"
             ${MY_ANDROID_ADB} root
+            echo "hello1"
+            #---Wait for the emulator to be online---#
+            ${MY_ANDROID_ADB} wait-for-device
+            echo "hello2"
             #---Wait for the emulator to be ready---#
             ${MY_ANDROID_ADB} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+            echo "hello3"
             #---Copy files---
             ${MY_ANDROID_ADB} push ./${!MY_ANDROID_TRIPLET}-app ${!MY_ANDROID_DEST_PATH}
+            echo "hello4"
             #---Run---#
             ${MY_ANDROID_ADB} shell ${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app
           done
