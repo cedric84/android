@@ -11,12 +11,12 @@ jobs:
       MY_ANDROID_AVD_NAME0:      ${{ 'armv7a-api16' }}
       MY_ANDROID_SYSTEM_IMAGE0:  ${{ 'system-images;android-16;default;armeabi-v7a' }}
       MY_ANDROID_TRIPLET0:       ${{ 'armv7a-linux-androideabi16' }}
-      MY_ANDROID_EMULATOR_PORT0: ${{ 5554 + 0 }}
+      MY_ANDROID_EMULATOR_PORT0: ${{ 5554 }}
       #---Android API #1---#
       MY_ANDROID_AVD_NAME1:      ${{ 'armv7a-api24' }}
       MY_ANDROID_SYSTEM_IMAGE1:  ${{ 'system-images;android-24;default;armeabi-v7a' }}
       MY_ANDROID_TRIPLET1:       ${{ 'armv7a-linux-androideabi24' }}
-      MY_ANDROID_EMULATOR_PORT1: ${{ 5554 + 2 }}
+      MY_ANDROID_EMULATOR_PORT1: ${{ 5556 }}
       #---Android API list---#
       MY_ANDROID_INDICES:        ${{ '0 1' }}
     steps:
