@@ -43,12 +43,17 @@ jobs:
             MY_ANDROID_AVD_NAME=MY_ANDROID_AVD_NAME${idx}
             MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
             MY_ANDROID_EMULATOR_PORT=MY_ANDROID_EMULATOR_PORT${idx}
+            MY_ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s emulator-${!MY_ANDROID_EMULATOR_PORT}"
             #---Create---#
             echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${!MY_ANDROID_AVD_NAME}" -k "${!MY_ANDROID_SYSTEM_IMAGE}"
             #---Start---#
             ${ANDROID_HOME}/emulator/emulator -avd ${!MY_ANDROID_AVD_NAME} -port ${!MY_ANDROID_EMULATOR_PORT} -no-window -no-audio -no-snapshot &
+            #---Wait for the emulator to be online---#
+            ${MY_ANDROID_ADB} wait-for-device
+            #---Restart as root---
+            ${MY_ANDROID_ADB} root
           done
-          unset MY_ANDROID_AVD_NAME MY_ANDROID_SYSTEM_IMAGE MY_ANDROID_EMULATOR_PORT
+          unset MY_ANDROID_AVD_NAME MY_ANDROID_SYSTEM_IMAGE MY_ANDROID_EMULATOR_PORT MY_ANDROID_ADB
 
       #---Build---#
       - name: build
@@ -73,19 +78,10 @@ jobs:
             MY_ANDROID_ADB="${ANDROID_HOME}/platform-tools/adb -s emulator-${!MY_ANDROID_EMULATOR_PORT}"
             #---Wait for the emulator to be online---#
             ${MY_ANDROID_ADB} wait-for-device
-            #---Restart as root---
-            echo "hello0"
-            ${MY_ANDROID_ADB} root
-            echo "hello1"
-            #---Wait for the emulator to be online---#
-            ${MY_ANDROID_ADB} wait-for-device
-            echo "hello2"
             #---Wait for the emulator to be ready---#
             ${MY_ANDROID_ADB} shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
-            echo "hello3"
             #---Copy files---
             ${MY_ANDROID_ADB} push ./${!MY_ANDROID_TRIPLET}-app ${!MY_ANDROID_DEST_PATH}
-            echo "hello4"
             #---Run---#
             ${MY_ANDROID_ADB} shell ${!MY_ANDROID_DEST_PATH}/${!MY_ANDROID_TRIPLET}-app
           done

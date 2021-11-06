@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <android/api-level.h>
 
 /**
  * @brief		The application entry point.
@@ -15,7 +16,7 @@
 extern int
 main(int argc, char* argv[])
 {
-	printf("%s started\n", __func__);
+	printf("%s started (API #%d)\n", __func__, __ANDROID_API__);
 	printf("%s terminated\n", __func__);
 	return EXIT_SUCCESS;
 }
