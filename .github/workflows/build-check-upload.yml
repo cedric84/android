@@ -34,9 +34,9 @@ jobs:
           for idx in ${MY_ANDROID_INDICES}
           do
             MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
-            ::group::installing ${!MY_ANDROID_SYSTEM_IMAGE}
+            echo "::group::installing ${!MY_ANDROID_SYSTEM_IMAGE}"
             ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "${!MY_ANDROID_SYSTEM_IMAGE}"
-            ::endgroup::
+            echo "::endgroup::"
           done
           unset MY_ANDROID_SYSTEM_IMAGE
       - name: create & start Android virtual devices
