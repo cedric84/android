@@ -8,15 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     env:
       #---Android API #0---#
-      MY_ANDROID_AVD_NAME0:     ${{ 'armv7a-api16' }}
-      MY_ANDROID_SYSTEM_IMAGE0: ${{ 'system-images;android-16;default;armeabi-v7a' }}
-      MY_ANDROID_TRIPLET0:      ${{ 'armv7a-linux-androideabi16' }}
+      MY_ANDROID_AVD_NAME0:      ${{ 'armv7a-api16' }}
+      MY_ANDROID_SYSTEM_IMAGE0:  ${{ 'system-images;android-16;default;armeabi-v7a' }}
+      MY_ANDROID_TRIPLET0:       ${{ 'armv7a-linux-androideabi16' }}
+      MY_ANDROID_EMULATOR_PORT0: ${{ 5554 + 0 }}
       #---Android API #1---#
-      MY_ANDROID_AVD_NAME1:     ${{ 'armv7a-api24' }}
-      MY_ANDROID_SYSTEM_IMAGE1: ${{ 'system-images;android-24;default;armeabi-v7a' }}
-      MY_ANDROID_TRIPLET1:      ${{ 'armv7a-linux-androideabi24' }}
+      MY_ANDROID_AVD_NAME1:      ${{ 'armv7a-api24' }}
+      MY_ANDROID_SYSTEM_IMAGE1:  ${{ 'system-images;android-24;default;armeabi-v7a' }}
+      MY_ANDROID_TRIPLET1:       ${{ 'armv7a-linux-androideabi24' }}
+      MY_ANDROID_EMULATOR_PORT1: ${{ 5554 + 2 }}
       #---Android API list---#
-      MY_ANDROID_INDICES:       ${{ '0 1' }}
+      MY_ANDROID_INDICES:        ${{ '0 1' }}
     steps:
 
       #---Checkout current repository---#
@@ -35,8 +37,8 @@ jobs:
 #          TEST=$(find ${ANDROID_NDK_LATEST_HOME} -name android.toolchain.cmake)
 #          cat ${TEST}
           
-      #---Prerequisites---#
-      - name: install
+      #---Prepare for Android---#
+      - name: install Android system images
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
@@ -44,15 +46,17 @@ jobs:
             ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "${!MY_ANDROID_SYSTEM_IMAGE}"
           done
           unset MY_ANDROID_SYSTEM_IMAGE
-      - name: create AVDs
+      - name: create & start AVDs
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
             MY_ANDROID_AVD_NAME=MY_ANDROID_AVD_NAME${idx}
             MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
+            MY_ANDROID_EMULATOR_PORT=MY_ANDROID_EMULATOR_PORT${idx}
             echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${!MY_ANDROID_AVD_NAME}" -k "${!MY_ANDROID_SYSTEM_IMAGE}"
+            ${ANDROID_HOME}/emulator/emulator -avd ${!MY_ANDROID_AVD_NAME} -port ${!MY_ANDROID_EMULATOR_PORT} -no-window -no-audio -no-snapshot &
           done
-          unset MY_ANDROID_AVD_NAME MY_ANDROID_SYSTEM_IMAGE
+          unset MY_ANDROID_AVD_NAME MY_ANDROID_SYSTEM_IMAGE MY_ANDROID_EMULATOR_PORT
 
       #---Build---#
       - name: build
@@ -61,7 +65,7 @@ jobs:
           do
             MY_ANDROID_TRIPLET=MY_ANDROID_TRIPLET${idx}
             MY_CC=$(find ${ANDROID_NDK_LATEST_HOME} -name ${!MY_ANDROID_TRIPLET}-clang)
-            ${MY_CC} -Wall -Werror -o./${MY_ANDROID_TRIPLET}-app ./main.c
+            ${MY_CC} -Wall -Werror -o./${!MY_ANDROID_TRIPLET}-app ./main.c
           done
           unset MY_ANDROID_TRIPLET MY_CC
           tree -R
