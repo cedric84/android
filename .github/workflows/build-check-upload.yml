@@ -32,14 +32,11 @@ jobs:
           
       #---Prerequisites---#
       - name: install
-        env:
-          MY_ANDROID_SDK_MANAGER: ${{env.ANDROID_HOME}}/cmdline-tools/latest/bin/sdkmanager
-          MY_ANDROID_AVD_MANAGER: ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager
         run: |
           for idx in ${MY_ANDROID_INDICES}
           do
           	MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
-          	${MY_ANDROID_SDK_MANAGER} "${!MY_ANDROID_SYSTEM_IMAGE}"
+          	${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "${!MY_ANDROID_SYSTEM_IMAGE}"
           done
       - name: create AVDs
         run: |
@@ -47,7 +44,7 @@ jobs:
           do
           	MY_ANDROID_AVD_NAME=MY_ANDROID_AVD_NAME${idx}
           	MY_ANDROID_SYSTEM_IMAGE=MY_ANDROID_SYSTEM_IMAGE${idx}
-            echo -ne '\n' | ${MY_ANDROID_AVD_MANAGER} -s create avd -n "${!MY_ANDROID_AVD_NAME}" -k "${!MY_ANDROID_SYSTEM_IMAGE}"
+            echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${!MY_ANDROID_AVD_NAME}" -k "${!MY_ANDROID_SYSTEM_IMAGE}"
           done
 #          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME0}" -k "system-images;android-16;default;armeabi-v7a"
 #          echo -ne '\n' | ${ANDROID_HOME}/cmdline-tools/latest/bin/avdmanager -s create avd -n "${MY_ANDROID_AVD_NAME1}" -k "system-images;android-24;default;armeabi-v7a"
