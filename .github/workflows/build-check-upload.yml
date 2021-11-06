@@ -60,7 +60,7 @@ jobs:
           for idx in ${MY_ANDROID_INDICES}
           do
             MY_ANDROID_TRIPLET=MY_ANDROID_TRIPLET${idx}
-            MY_CC=$(find ${ANDROID_NDK_LATEST_HOME} -name ${!MY_ANDROID_TRIPLET}clang)
+            MY_CC=$(find ${ANDROID_NDK_LATEST_HOME} -name ${!MY_ANDROID_TRIPLET}-clang)
             ${MY_CC} -Wall -Werror -o./${MY_ANDROID_TRIPLET}-app ./main.c
           done
           unset MY_ANDROID_TRIPLET MY_CC
