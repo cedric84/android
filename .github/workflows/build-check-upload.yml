@@ -22,7 +22,7 @@ jobs:
       #---Android API generic---#
       MY_ANDROID_INDICES:        ${{ '0 1' }}
       MY_ANDROID_ENABLED:        ${{ !false }}
-      MY_ANDROID_BUILD_ONLY:     ${{ !false }}
+      MY_ANDROID_BUILD_ONLY:     ${{ false }}
     steps:
       #---Checkout current repository---#
       - name: checkout
